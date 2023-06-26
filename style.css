@@ -18,4 +18,7 @@ html {
   --h1-font-size: 36px;
   --small-box-text-size: 16px;
   --big-box-text-size: 18px;
+
+  --svg-height: 24px;
+  --svg-width: 24px;
 }
