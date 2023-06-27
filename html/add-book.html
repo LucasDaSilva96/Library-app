@@ -16,5 +16,49 @@
     <script src="../script.js" defer></script>
     <title>Your Library</title>
   </head>
-  <body></body>
+  <body>
+    <div class="add-book-main-container">
+      <!-- Form container start -->
+      <div class="add-book-form-container">
+        <form action="get">
+          <input
+            class="input-title"
+            type="text"
+            placeholder="Title"
+            name="Title of the book"
+          />
+          <input
+            class="input-author"
+            type="text"
+            placeholder="Author"
+            name="Author of the book"
+          />
+
+          <input
+            class="input-pages"
+            type="number"
+            min="1"
+            placeholder="Number of Pages"
+            name="number of pages in the book"
+          />
+
+          <select name="Read the book selection" id="read-book">
+            <option selected="true" value="option-rubric" disabled="disabled">
+              Have you read the book?
+            </option>
+            <option class="yes-option" value="yes">Yes</option>
+            <option class="no-option" value="no">No</option>
+          </select>
+        </form>
+      </div>
+      <!-- Form container end -->
+
+      <!-- Add book container start -->
+      <div class="add-book-box">
+        <p>Add</p>
+      </div>
+      <!-- Add book container End -->
+    </div>
+    <!--  -->
+  </body>
 </html>
