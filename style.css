@@ -213,4 +213,12 @@ a {
   width: 24px;
 }
 
+.favo-svg-clicked {
+  fill: #ffc600;
+}
+
+.read-svg-clicked {
+  fill: #9ad1d4;
+}
+
 /* ************ */
