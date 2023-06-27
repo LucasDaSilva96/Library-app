@@ -48,7 +48,92 @@
         <h1>Library</h1>
       </div>
       <!-- End of the h1(Library-txt) container  -->
+
+      <!-- Start of the menu container -->
+      <div class="menu-container">
+        <!--  -->
+        <div class="books-box">
+          <a href="#">Books</a>
+        </div>
+        <!--  -->
+        <div class="library-log-box">
+          <a href="./library-log.html">Library Log</a>
+        </div>
+        <!--  -->
+        <div class="favorite-box">
+          <a href="./favorite.html">Favorite</a>
+        </div>
+        <!--  -->
+      </div>
+      <!-- End of the menu container -->
+
+      <!-- Start of the add book container if there isn't any books -->
+      <div class="book-container-books-unavailable">
+        <!--  -->
+        <div class="add-book-svg-box">
+          <svg
+            class="plus-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+            height="24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+        </div>
+        <!--  -->
+        <div class="add-book-txt-box">
+          <p>Add Book</p>
+        </div>
+        <!--  -->
+      </div>
+      <!-- End of the add book container if there isn't any books -->
+
+      <!-- Start of the book container if there is books -->
+      <div class="book-container-books-available">
+        <!-- Book list container start  -->
+        <div class="book-list">
+          <!-- book box/boxes start -->
+          <div class="book-box">
+            <div class="book-about-txt-box">
+              <h2 class="book-title">Title</h2>
+              <p class="book-author">Author</p>
+              <p class="book-pages">300</p>
+            </div>
+          </div>
+          <!-- book box/boxes end -->
+          <div class="book-options-container">
+            <!--  -->
+            <div class="add-to-favorite-box">
+              <p>Add to favorite</p>
+            </div>
+            <!--  -->
+            <div class="library-log-box">
+              <p>library Log</p>
+            </div>
+            <!--  -->
+            <div class="favorite-box">
+              <p>Favorite</p>
+            </div>
+          </div>
+          <!--  -->
+        </div>
+        <!-- Book list container end  -->
+        <!--  -->
+        <div class="add-new-book-container">
+          <p class="add-new-book-btn">Add new book</p>
+        </div>
+        <!--  -->
+      </div>
+      <!-- End of the book container if there is books -->
     </div>
-    <!--  -->
+    <!-- End of main container -->
   </body>
 </html>
