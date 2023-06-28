@@ -191,12 +191,138 @@ a {
   padding: 15px;
   background-color: var(--green-color);
   border-radius: 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .add-new-book-btn {
   font-weight: 600;
   font-size: 18px;
+  transition: all 0.3s ease;
 }
+
+.add-new-book-btn:link:active {
+  transform: scale(1.1);
+}
+
+/********* add-book.html ************/
+
+.add-book-main-container {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.add-book-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 15px;
+  background-color: var(--grey-bg-color);
+  padding: 10px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.add-book-form input,
+.add-book-form select {
+  outline: none;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.yes-option {
+  background-color: var(--green-color);
+}
+
+.no-option {
+  background-color: var(--brown-bg-color);
+}
+
+.add-book-box {
+  border-radius: 15px;
+}
+
+.add-book-btn {
+  padding: 10px;
+  font-size: 22px;
+  width: 150px;
+  font-weight: 600;
+  border-radius: 15px;
+  border: none;
+  background-color: var(--green-color);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-book-btn:active {
+  transform: scale(1.1);
+}
+
+/***********************************/
+
+/* **** Library-log.html ********** */
+
+.book-log-container {
+  margin-top: 40px;
+  min-height: 50vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #7a8b995e;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.books-read-box,
+.number-of-pages-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.number-of-books-read-box,
+.number-of-pages {
+  padding: 15px;
+  background-color: #dbdbdb7e;
+  width: 80px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.log-heading {
+  border-bottom: 1.5px solid #000;
+}
+
+.motivation-box {
+  padding: 15px;
+  background-color: var(--green-color);
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* ********************************* */
 
 /* Reusable classes */
 
