@@ -116,6 +116,12 @@ a {
 .plus-svg {
   height: 48px;
   width: 48px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.plus-svg:active {
+  transform: scale(1.1);
 }
 
 .add-book-svg-box {
@@ -125,6 +131,7 @@ a {
   padding: 15px;
   border-radius: 20px;
   background-color: var(--green-color);
+  cursor: pointer;
 }
 
 .add-book-txt-box p {
