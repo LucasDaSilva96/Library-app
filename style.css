@@ -142,13 +142,15 @@ a {
 .book-container-books-available {
   display: grid;
   /* Change in JS when adding a new book */
-  grid-template-rows: 6fr 0.3fr;
+  grid-template-rows: 0.8fr 0.1fr;
 }
 
 .book-list {
-  padding: 10px;
+  padding: 20px 10px;
   display: grid;
   grid-template-rows: repeat(3, 1fr);
+  row-gap: 10px;
+  max-height: 90%;
   overflow-y: auto;
 }
 
