@@ -45,7 +45,7 @@ let title;
 let author;
 let pages;
 let read;
-let counter;
+let counter = 0;
 
 // This is the add new book form function
 const add_new_book_form_function = function () {
@@ -86,34 +86,42 @@ const add_new_book_form_function = function () {
     new_book.author = author;
     new_book.pages = pages;
     new_book.read = read;
-    book_library.push(new_book);
-    counter = book_library.length;
-    console.log("clicked");
 
     const new_book_string = JSON.stringify(new_book);
     // localStorage
-    localStorage.setItem("book", new_book_string);
 
-    window.location.href = "index.html";
+    if (
+      title === undefined ||
+      author === undefined ||
+      pages === undefined ||
+      read === undefined
+    ) {
+      return;
+    } else {
+      if (localStorage.length <= 0) {
+        localStorage.setItem("book", new_book_string);
+      } else {
+        localStorage.setItem(`book${localStorage.length}`, new_book_string);
+      }
+      window.location.href = "index.html";
+    }
   });
 };
 
 // This logic is for checking if the book_library array is empty or not
 document.addEventListener("DOMContentLoaded", function () {
-  if (
-    book_library.length === 0 &&
-    window.location.href.includes("index.html")
-  ) {
-    book_unavailable_container.classList.remove("display-none");
+  const localStorage_items = localStorage.getItem("book0");
+  if (localStorage.length <= 0 && window.location.href.includes("index.html")) {
     book_available_container.classList.add("display-none");
+    book_unavailable_container.classList.remove("display-none");
     // This is for redirect the user to the add add-book.html
     add_book_btn.addEventListener("click", function () {
       window.location.href = "add-book.html";
       add_new_book_form_function();
     });
   } else if (
-    book_library.length !== 0 &&
-    window.location.href.includes("index.html")
+    window.location.href.includes("index.html") &&
+    localStorage.length > 0
   ) {
     book_unavailable_container.classList.add("display-none");
     book_available_container.classList.remove("display-none");
