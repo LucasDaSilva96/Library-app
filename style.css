@@ -355,4 +355,12 @@ a {
   fill: #9ad1d4;
 }
 
+.not-read {
+  background-color: var(--brown-bg-color);
+}
+
+.read {
+  background-color: var(--green-color);
+}
+
 /* ************ */
