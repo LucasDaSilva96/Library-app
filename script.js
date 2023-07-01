@@ -14,11 +14,12 @@ const book_library = [];
 
 // This is the Book class
 class Book {
-  constructor(title, author, pages, read) {
+  constructor(title, author, pages, read, favorite) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.favorite = favorite;
   }
   // This function adds the new book to the book_library array
   add_new_book() {
@@ -27,6 +28,7 @@ class Book {
       author: this.author,
       pages: this.pages,
       read: this.read,
+      favorite: this.favorite,
     });
   }
 
@@ -45,6 +47,7 @@ let title;
 let author;
 let pages;
 let read;
+let favorite;
 let counter = 0;
 
 // This is the add new book form function
@@ -131,7 +134,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     do {
       book_library[size] = JSON.parse(localStorage.getItem(`book_${size}`));
-
       book_list.innerHTML += `
         <div class="book-box ${
           book_library[size].read === true ? "read" : "not-read"
@@ -150,7 +152,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="favorite-svg option-svgs-size"
+                class="favorite-svg option-svgs-size ${
+                  book_library[size].favorite === true ? "favo-svg-clicked" : ""
+                }"
               >
                 <path
                   stroke-linecap="round"
@@ -201,6 +205,25 @@ document.addEventListener("DOMContentLoaded", function () {
       size += 1;
     } while (size < localStorage.length);
 
+    const favo_btns = document.querySelectorAll(".add-to-favorite-box");
+
+    favo_btns.forEach((el, i) => {
+      el.addEventListener("click", function () {
+        el.children[0].classList.toggle("favo-svg-clicked");
+
+        if (
+          book_library[i].favorite === undefined ||
+          book_library[i].favorite === false
+        ) {
+          book_library[i].favorite = true;
+          localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
+        } else if (book_library[i].favorite === true) {
+          book_library[i].favorite = false;
+          localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
+        }
+      });
+    });
+
     // ****************************************************
     const add_book = document.querySelector(".add-new-book-btn");
     add_book.addEventListener("click", function () {
@@ -211,6 +234,119 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (window.location.href.includes("add-book.html")) {
     add_new_book_form_function();
+  }
+
+  if (window.location.href.includes("library-log.html")) {
+    const nr_of_books_read = document.querySelector(
+      ".number-of-books-read-box"
+    );
+
+    const nr_of_pages_read = document.querySelector(".nr-of-pages-read");
+
+    const books_log_array = [];
+    let nr_of_pages = 0;
+    let nr_of_Books = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      books_log_array[i] = JSON.parse(localStorage.getItem(`book_${i}`));
+    }
+    books_log_array.forEach((el) => {
+      if (el.read === true) {
+        nr_of_pages += Number(el.pages);
+        nr_of_Books++;
+      }
+    });
+
+    nr_of_books_read.textContent = `${nr_of_Books}`;
+    nr_of_pages_read.textContent = `${nr_of_pages}`;
+  }
+
+  if (
+    window.location.href.includes("favorite.html") &&
+    localStorage.length > 0
+  ) {
+    let arr_1 = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      arr_1[i] = JSON.parse(localStorage.getItem(`book_${i}`));
+    }
+
+    const book_list_favo = document.querySelector(".book-list");
+    book_list_favo.style.maxHeight = "100%";
+    let favo_counter = 0;
+    for (let i = 0; i < arr_1.length; i++) {
+      if (arr_1[i].favorite === true) {
+        favo_counter++;
+        book_list_favo.innerHTML += `
+        <div class="book-box ${arr_1[i].read === false ? "not-read" : ""}">
+        <div class="book-about-txt-box">
+          <h2 class="book-title">${arr_1[i].title}</h2>
+          <p class="book-author">${arr_1[i].author}</p>
+          <p class="book-pages">${arr_1[i].pages} pages</p>
+        </div>
+        <div class="book-options-container">
+          <!--  -->
+          <div class="add-to-favorite-box">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="favorite-svg option-svgs-size favo-svg-clicked"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+              />
+            </svg>
+          </div>
+          <!--  -->
+          <div class="mark-as-read-box">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="read-svg option-svgs-size"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+              />
+            </svg>
+          </div>
+          <!--  -->
+          <div class="delete-box">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="delete-svg option-svgs-size"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+              />
+            </svg>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+        `;
+      }
+    }
+    if (favo_counter === 0) {
+      book_list_favo.innerHTML = `
+      <div class="book-about-txt-box">
+      <h2 class="book-title">Your list is empty</h2>
+      </div>
+      `;
+    }
   }
 });
 
