@@ -110,7 +110,6 @@ const add_new_book_form_function = function () {
 
 // This logic is for checking if the book_library array is empty or not
 document.addEventListener("DOMContentLoaded", function () {
-  const localStorage_items = localStorage.getItem("book0");
   if (localStorage.length <= 0 && window.location.href.includes("index.html")) {
     book_available_container.classList.add("display-none");
     book_unavailable_container.classList.remove("display-none");
@@ -129,11 +128,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const book_list = document.querySelector(".book-list");
 
     let size = 0;
+
     do {
       book_library[size] = JSON.parse(localStorage.getItem(`book_${size}`));
 
       book_list.innerHTML += `
-        <div class="book-box">
+        <div class="book-box ${
+          book_library[size].read === true ? "read" : "not-read"
+        }">
           <div class="book-about-txt-box">
             <h2 class="book-title">${book_library[size].title}</h2>
             <p class="book-author">${book_library[size].author}</p>
@@ -195,9 +197,10 @@ document.addEventListener("DOMContentLoaded", function () {
           <!--  -->
         </div>
 `;
-      console.log(book_library);
+
       size += 1;
     } while (size < localStorage.length);
+
     // ****************************************************
     const add_book = document.querySelector(".add-new-book-btn");
     add_book.addEventListener("click", function () {
