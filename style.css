@@ -191,6 +191,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .add-new-book-container {
@@ -345,14 +346,17 @@ a {
 .option-svgs-size {
   height: 24px;
   width: 24px;
+  transition: all 0.7s ease-in-out;
 }
 
 .favo-svg-clicked {
   fill: #ffc600;
+  transform: rotate(360deg);
 }
 
 .read-svg-clicked {
   fill: #9ad1d4;
+  transform: scale(1.4);
 }
 
 .not-read {
