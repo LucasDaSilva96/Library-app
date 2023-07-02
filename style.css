@@ -346,7 +346,7 @@ a {
 .option-svgs-size {
   height: 24px;
   width: 24px;
-  transition: all 0.7s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .favo-svg-clicked {
