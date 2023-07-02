@@ -244,11 +244,41 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // ****************************************************
     const add_book = document.querySelector(".add-new-book-btn");
     add_book.addEventListener("click", function () {
       window.location.href = "add-book.html";
       add_new_book_form_function();
+    });
+
+    const delete_box = document.querySelectorAll(".delete-box");
+
+    delete_box.forEach((el) => {
+      el.addEventListener("click", function () {
+        el.children[0].classList.toggle("deleted");
+
+        let index_tracker;
+
+        const book_to_find = {
+          title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
+          author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
+        };
+
+        index_tracker = book_library.findIndex(
+          (book) =>
+            book.title === book_to_find.title_find &&
+            book.author === book_to_find.author_find
+        );
+
+        book_library.splice(index_tracker, 1);
+        localStorage.clear();
+        for (let i = 0; i < book_library.length; i++) {
+          localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
+        }
+
+        setTimeout(function () {
+          location.reload();
+        }, 500);
+      });
     });
   }
 
@@ -292,9 +322,6 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < localStorage.length; i++) {
       arr_1[i] = JSON.parse(localStorage.getItem(`book_${i}`));
     }
-
-    console.log(arr_1);
-
     const book_list_favo = document.querySelector(".book-list");
     book_list_favo.style.maxHeight = "100%";
     let favo_counter = 0;
@@ -405,6 +432,37 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
           location.reload();
         }, 500);
+      });
+
+      const delete_box = document.querySelectorAll(".delete-box");
+
+      delete_box.forEach((el) => {
+        el.addEventListener("click", function () {
+          el.children[0].classList.toggle("deleted");
+
+          let index_tracker;
+
+          const book_to_find = {
+            title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
+            author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
+          };
+
+          index_tracker = book_library.findIndex(
+            (book) =>
+              book.title === book_to_find.title_find &&
+              book.author === book_to_find.author_find
+          );
+
+          book_library.splice(index_tracker, 1);
+          localStorage.clear();
+          for (let i = 0; i < book_library.length; i++) {
+            localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
+          }
+
+          setTimeout(function () {
+            location.reload();
+          }, 500);
+        });
       });
       // ***
     });
