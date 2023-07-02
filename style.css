@@ -359,6 +359,33 @@ a {
   transform: scale(1.4);
 }
 
+.deleted {
+  fill: #ef233c;
+  -webkit-animation: deleted 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: deleted 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
+
+@-webkit-keyframes deleted {
+  0% {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+    transform: rotateY(360deg);
+  }
+}
+@keyframes deleted {
+  0% {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+    transform: rotateY(360deg);
+  }
+}
+
 .not-read {
   background-color: var(--brown-bg-color);
 }
