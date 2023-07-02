@@ -164,14 +164,16 @@ document.addEventListener("DOMContentLoaded", function () {
               </svg>
             </div>
             <!--  -->
-            <div class="mark-as-read-box">
+            <div class="mark-as-read-box ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="read-svg option-svgs-size"
+                class="read-svg option-svgs-size ${
+                  book_library[size].read === true ? "read-svg-clicked" : ""
+                }"
               >
                 <path
                   stroke-linecap="round"
@@ -224,6 +226,24 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
+    const read_btns = document.querySelectorAll(".mark-as-read-box");
+
+    read_btns.forEach((el, i) => {
+      el.addEventListener("click", function () {
+        el.children[0].classList.toggle("read-svg-clicked");
+
+        if (book_library[i].read === false) {
+          book_library[i].read = true;
+          localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
+          location.reload();
+        } else if (book_library[i].read === true) {
+          book_library[i].read = false;
+          localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
+          location.reload();
+        }
+      });
+    });
+
     // ****************************************************
     const add_book = document.querySelector(".add-new-book-btn");
     add_book.addEventListener("click", function () {
@@ -232,9 +252,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ****************************************************
+
   if (window.location.href.includes("add-book.html")) {
     add_new_book_form_function();
   }
+  // ****************************************************
 
   if (window.location.href.includes("library-log.html")) {
     const nr_of_books_read = document.querySelector(
@@ -259,6 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
     nr_of_books_read.textContent = `${nr_of_Books}`;
     nr_of_pages_read.textContent = `${nr_of_pages}`;
   }
+  // ****************************************************
 
   if (
     window.location.href.includes("favorite.html") &&
@@ -268,6 +292,8 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < localStorage.length; i++) {
       arr_1[i] = JSON.parse(localStorage.getItem(`book_${i}`));
     }
+
+    console.log(arr_1);
 
     const book_list_favo = document.querySelector(".book-list");
     book_list_favo.style.maxHeight = "100%";
@@ -346,8 +372,42 @@ document.addEventListener("DOMContentLoaded", function () {
       <h2 class="book-title">Your list is empty</h2>
       </div>
       `;
+      return;
     }
+
+    let favo_list_btns = document.querySelectorAll(".add-to-favorite-box");
+
+    favo_list_btns.forEach((el) => {
+      el.addEventListener("click", function () {
+        let index_tracker;
+
+        const book_to_find = {
+          title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
+          author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
+        };
+
+        index_tracker = arr_1.findIndex(
+          (book) =>
+            book.title === book_to_find.title_find &&
+            book.author === book_to_find.author_find
+        );
+
+        arr_1[index_tracker].favorite = false;
+
+        for (let i = 0; i < localStorage.length; i++) {
+          localStorage.setItem(`book_${i}`, JSON.stringify(arr_1[i]));
+        }
+
+        el.children[0].classList.remove("favo-svg-clicked");
+
+        setTimeout(function () {
+          location.reload();
+        }, 500);
+      });
+      // ***
+    });
   }
+  // ****************************************************
 });
 
 // **************************
