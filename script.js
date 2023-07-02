@@ -334,7 +334,9 @@ document.addEventListener("DOMContentLoaded", function () {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="read-svg option-svgs-size"
+              class="read-svg option-svgs-size ${
+                arr_1[i].read === true ? "read-svg-clicked" : ""
+              }""
             >
               <path
                 stroke-linecap="round"
@@ -405,6 +407,41 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 500);
       });
       // ***
+    });
+
+    const read_favo_btns = document.querySelectorAll(".mark-as-read-box");
+
+    read_favo_btns.forEach((el, i) => {
+      el.addEventListener("click", function () {
+        el.children[0].classList.toggle("read-svg-clicked");
+
+        let index_tracker;
+
+        const book_to_find = {
+          title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
+          author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
+        };
+
+        index_tracker = arr_1.findIndex(
+          (book) =>
+            book.title === book_to_find.title_find &&
+            book.author === book_to_find.author_find
+        );
+
+        if (arr_1[index_tracker].read === true) {
+          arr_1[index_tracker].read = false;
+        } else if (arr_1[index_tracker].read === false) {
+          arr_1[index_tracker].read = true;
+        }
+
+        for (let i = 0; i < localStorage.length; i++) {
+          localStorage.setItem(`book_${i}`, JSON.stringify(arr_1[i]));
+        }
+
+        setTimeout(function () {
+          location.reload();
+        }, 500);
+      });
     });
   }
   // ****************************************************
