@@ -316,16 +316,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (window.location.href.includes("favorite.html")) {
     const book_list_favo = document.querySelector(".book-list");
+    book_list_favo.style.maxHeight = "100%";
+    let favo_counter = 0;
+    let arr_1 = [];
     if (localStorage.length > 0) {
-      let arr_1 = [];
       for (let i = 0; i < localStorage.length; i++) {
         arr_1[i] = JSON.parse(localStorage.getItem(`book_${i}`));
       }
-      book_list_favo.style.maxHeight = "100%";
-      let favo_counter = 0;
+
       for (let i = 0; i < arr_1.length; i++) {
         if (arr_1[i].favorite === true) {
           favo_counter++;
+        }
+      }
+    }
+    // ******
+    if (favo_counter > 0) {
+      for (let i = 0; i < arr_1.length; i++) {
+        if (arr_1[i].favorite === true) {
           book_list_favo.innerHTML += `
         <div class="book-box ${arr_1[i].read === false ? "not-read" : ""}">
         <div class="book-about-txt-box">
