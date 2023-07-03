@@ -314,21 +314,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // ****************************************************
 
-  if (
-    window.location.href.includes("favorite.html") &&
-    localStorage.length > 0
-  ) {
-    let arr_1 = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      arr_1[i] = JSON.parse(localStorage.getItem(`book_${i}`));
-    }
+  if (window.location.href.includes("favorite.html")) {
     const book_list_favo = document.querySelector(".book-list");
-    book_list_favo.style.maxHeight = "100%";
-    let favo_counter = 0;
-    for (let i = 0; i < arr_1.length; i++) {
-      if (arr_1[i].favorite === true) {
-        favo_counter++;
-        book_list_favo.innerHTML += `
+    if (localStorage.length > 0) {
+      let arr_1 = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        arr_1[i] = JSON.parse(localStorage.getItem(`book_${i}`));
+      }
+      book_list_favo.style.maxHeight = "100%";
+      let favo_counter = 0;
+      for (let i = 0; i < arr_1.length; i++) {
+        if (arr_1[i].favorite === true) {
+          favo_counter++;
+          book_list_favo.innerHTML += `
         <div class="book-box ${arr_1[i].read === false ? "not-read" : ""}">
         <div class="book-about-txt-box">
           <h2 class="book-title">${arr_1[i].title}</h2>
@@ -393,52 +391,80 @@ document.addEventListener("DOMContentLoaded", function () {
         <!--  -->
       </div>
         `;
-      }
-    }
-    if (favo_counter === 0) {
-      book_list_favo.innerHTML = `
-      <div class="book-about-txt-box">
-      <h2 class="book-title">Your list is empty</h2>
-      </div>
-      `;
-      return;
-    }
-
-    let favo_list_btns = document.querySelectorAll(".add-to-favorite-box");
-
-    favo_list_btns.forEach((el) => {
-      el.addEventListener("click", function () {
-        let index_tracker;
-
-        const book_to_find = {
-          title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
-          author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
-        };
-
-        index_tracker = arr_1.findIndex(
-          (book) =>
-            book.title === book_to_find.title_find &&
-            book.author === book_to_find.author_find
-        );
-
-        arr_1[index_tracker].favorite = false;
-
-        for (let i = 0; i < localStorage.length; i++) {
-          localStorage.setItem(`book_${i}`, JSON.stringify(arr_1[i]));
         }
+      }
 
-        el.children[0].classList.remove("favo-svg-clicked");
+      let favo_list_btns = document.querySelectorAll(".add-to-favorite-box");
 
-        setTimeout(function () {
-          location.reload();
-        }, 500);
+      favo_list_btns.forEach((el) => {
+        el.addEventListener("click", function () {
+          let index_tracker;
+
+          const book_to_find = {
+            title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
+            author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
+          };
+
+          index_tracker = arr_1.findIndex(
+            (book) =>
+              book.title === book_to_find.title_find &&
+              book.author === book_to_find.author_find
+          );
+
+          arr_1[index_tracker].favorite = false;
+
+          for (let i = 0; i < localStorage.length; i++) {
+            localStorage.setItem(`book_${i}`, JSON.stringify(arr_1[i]));
+          }
+
+          el.children[0].classList.remove("favo-svg-clicked");
+
+          setTimeout(function () {
+            location.reload();
+          }, 500);
+        });
+
+        const delete_box = document.querySelectorAll(".delete-box");
+
+        delete_box.forEach((el) => {
+          el.addEventListener("click", function () {
+            el.children[0].classList.toggle("deleted");
+
+            let index_tracker;
+
+            const book_to_find = {
+              title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
+              author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
+            };
+
+            index_tracker = book_library.findIndex(
+              (book) =>
+                book.title === book_to_find.title_find &&
+                book.author === book_to_find.author_find
+            );
+
+            book_library.splice(index_tracker, 1);
+            localStorage.clear();
+            for (let i = 0; i < book_library.length; i++) {
+              localStorage.setItem(
+                `book_${i}`,
+                JSON.stringify(book_library[i])
+              );
+            }
+
+            setTimeout(function () {
+              location.reload();
+            }, 500);
+          });
+        });
+        // ***
       });
 
-      const delete_box = document.querySelectorAll(".delete-box");
+      const read_favo_btns = document.querySelectorAll(".mark-as-read-box");
 
-      delete_box.forEach((el) => {
+      read_favo_btns.forEach((el, i) => {
         el.addEventListener("click", function () {
-          el.children[0].classList.toggle("deleted");
+          el.children[0].classList.toggle("read-svg-clicked");
 
           let index_tracker;
 
@@ -447,16 +473,20 @@ document.addEventListener("DOMContentLoaded", function () {
             author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
           };
 
-          index_tracker = book_library.findIndex(
+          index_tracker = arr_1.findIndex(
             (book) =>
               book.title === book_to_find.title_find &&
               book.author === book_to_find.author_find
           );
 
-          book_library.splice(index_tracker, 1);
-          localStorage.clear();
-          for (let i = 0; i < book_library.length; i++) {
-            localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
+          if (arr_1[index_tracker].read === true) {
+            arr_1[index_tracker].read = false;
+          } else if (arr_1[index_tracker].read === false) {
+            arr_1[index_tracker].read = true;
+          }
+
+          for (let i = 0; i < localStorage.length; i++) {
+            localStorage.setItem(`book_${i}`, JSON.stringify(arr_1[i]));
           }
 
           setTimeout(function () {
@@ -464,55 +494,16 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 500);
         });
       });
-      // ***
-    });
-
-    const read_favo_btns = document.querySelectorAll(".mark-as-read-box");
-
-    read_favo_btns.forEach((el, i) => {
-      el.addEventListener("click", function () {
-        el.children[0].classList.toggle("read-svg-clicked");
-
-        let index_tracker;
-
-        const book_to_find = {
-          title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
-          author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
-        };
-
-        index_tracker = arr_1.findIndex(
-          (book) =>
-            book.title === book_to_find.title_find &&
-            book.author === book_to_find.author_find
-        );
-
-        if (arr_1[index_tracker].read === true) {
-          arr_1[index_tracker].read = false;
-        } else if (arr_1[index_tracker].read === false) {
-          arr_1[index_tracker].read = true;
-        }
-
-        for (let i = 0; i < localStorage.length; i++) {
-          localStorage.setItem(`book_${i}`, JSON.stringify(arr_1[i]));
-        }
-
-        setTimeout(function () {
-          location.reload();
-        }, 500);
-      });
-    });
+    } else {
+      book_list_favo.innerHTML = `
+      <div class="book-about-txt-box">
+      <h2 class="book-title">Your list is empty</h2>
+      </div>
+      `;
+      return;
+    }
   }
   // ****************************************************
 });
 
 // **************************
-
-// This is for delete all the book objects in the book_library array
-function clean_array() {
-  let size = book_library.length;
-  while (size > 1) {
-    book_library.splice(size, 1);
-    size--;
-  }
-}
-// clean_array();
