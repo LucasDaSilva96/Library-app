@@ -6,8 +6,11 @@ const book_unavailable_container = document.querySelector(
 const book_available_container = document.querySelector(
   ".book-container-books-available"
 );
-
+const search_bar = document.getElementById("search-bar");
+const search_svg = document.querySelector(".search-svg-container");
 const add_book_btn = document.querySelector(".add-book-svg-box");
+// ***********
+let search_typed;
 
 // This is the book array for the index.html. This array
 // will be used to save the new books and push it to the localStorage
@@ -49,6 +52,10 @@ let author;
 let pages;
 let read;
 let favorite;
+
+export { Book };
+export { book_library };
+export { new_book };
 
 // This is the add new book form function
 // This function will be invoked when the user is on the
@@ -127,6 +134,28 @@ document.addEventListener("DOMContentLoaded", function () {
   // This checks if the localStorage has any books stored and if the user is on the
   // index.html file. If the localStorage is empty do the following....
   if (localStorage.length <= 0 && window.location.href.includes("index.html")) {
+    // **********************************
+    search_bar.addEventListener("input", function () {
+      search_typed = search_bar.value;
+    });
+
+    // **********************************
+
+    // ******************************************
+
+    search_svg.addEventListener("click", function () {
+      if (search_typed === undefined || search_typed === null) {
+        alert("Please enter a valid input");
+      } else {
+        sessionStorage.setItem("search", search_typed);
+
+        setTimeout(function () {
+          window.location.href = "./search.html";
+        }, 200);
+      }
+    });
+
+    // *******************************************
     book_available_container.classList.add("display-none");
     book_unavailable_container.classList.remove("display-none");
     // This is for redirect the user to the add add-book.html
@@ -141,6 +170,28 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href.includes("index.html") &&
     localStorage.length > 0
   ) {
+    // **********************************
+    search_bar.addEventListener("input", function () {
+      search_typed = search_bar.value;
+    });
+
+    // **********************************
+
+    // ******************************************
+
+    search_svg.addEventListener("click", function () {
+      if (search_typed === undefined || search_typed === null) {
+        alert("Please enter a valid input");
+      } else {
+        sessionStorage.setItem("search", search_typed);
+
+        setTimeout(function () {
+          window.location.href = "./search.html";
+        }, 200);
+      }
+    });
+
+    // *******************************************
     book_unavailable_container.classList.add("display-none");
     book_available_container.classList.remove("display-none");
     // ****************************************************
@@ -343,6 +394,50 @@ document.addEventListener("DOMContentLoaded", function () {
   // ****************************************************
 
   if (window.location.href.includes("library-log.html")) {
+    // **********************************
+    search_bar.addEventListener("input", function () {
+      search_typed = search_bar.value;
+    });
+
+    // **********************************
+    // ******************************************
+
+    search_svg.addEventListener("click", function () {
+      if (search_typed === undefined || search_typed === null) {
+        alert("Please enter a valid input");
+      } else {
+        sessionStorage.setItem("search", search_typed);
+
+        setTimeout(function () {
+          window.location.href = "./search.html";
+        }, 200);
+      }
+    });
+
+    // *******************************************
+
+    // ******************************************
+
+    search_svg.addEventListener("click", function () {
+      if (search_typed === undefined || search_typed === null) {
+        alert("Please enter a valid input");
+      } else {
+        search_svg.addEventListener("click", function () {
+          if (search_typed === undefined || search_typed === null) {
+            alert("Please enter a valid input");
+          } else {
+            sessionStorage.setItem("search", search_typed);
+
+            setTimeout(function () {
+              window.location.href = "./search.html";
+            }, 200);
+          }
+        });
+      }
+    });
+
+    // *******************************************
+
     const nr_of_books_read = document.querySelector(
       ".number-of-books-read-box"
     );
@@ -380,29 +475,43 @@ document.addEventListener("DOMContentLoaded", function () {
   // ****************************************************
 
   if (window.location.href.includes("favorite.html")) {
-    const book_list_favo = document.querySelector(".book-list");
-    book_list_favo.style.height = "100%";
+    // **********************************
+    search_bar.addEventListener("input", function () {
+      search_typed = search_bar.value;
+    });
 
+    // **********************************
+    // ******************************************
+
+    search_svg.addEventListener("click", function () {
+      if (search_typed === undefined || search_typed === null) {
+        alert("Please enter a valid input");
+      } else {
+        sessionStorage.setItem("search", search_typed);
+
+        setTimeout(function () {
+          window.location.href = "./search.html";
+        }, 200);
+      }
+    });
+
+    // *******************************************
+    const book_list_favo = document.querySelector(".book-list");
     // This variable will keep track of the number of books object
     // that has the property "new_book".favorite = true
     let favo_counter = 0;
-
-    // This array is for saving the localStorage in it when the user is
-    // on the favorite.html file
-    let arr_1 = [];
-
-    // This is for getting the localStorage objects and save it on the
-    // arr_1 array
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
-        arr_1[i] = JSON.parse(localStorage.getItem(`book_${i}`));
+        book_library[i] = JSON.parse(localStorage.getItem(`book_${i}`));
       }
+
+      book_list_favo.style.height = "750px";
 
       // This is for looping through the arr_1 and check if the current
       // object has favorite property set to true, and if so
       // increment the favo_counter by 1;
-      for (let i = 0; i < arr_1.length; i++) {
-        if (arr_1[i].favorite === true) {
+      for (let i = 0; i < book_library.length; i++) {
+        if (book_library[i].favorite === true) {
           favo_counter++;
         }
       }
@@ -413,14 +522,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // In this html there are some check-points for making sure the that
     // right css-class is added depending on the current book properties
     if (favo_counter > 0) {
-      for (let i = 0; i < arr_1.length; i++) {
-        if (arr_1[i].favorite === true) {
+      for (let i = 0; i < book_library.length; i++) {
+        if (book_library[i].favorite === true) {
           book_list_favo.innerHTML += `
-        <div class="book-box ${arr_1[i].read === false ? "not-read" : ""}">
+        <div class="book-box ${
+          book_library[i].read === false ? "not-read" : ""
+        }">
         <div class="book-about-txt-box">
-          <h2 class="book-title">${arr_1[i].title}</h2>
-          <p class="book-author">${arr_1[i].author}</p>
-          <p class="book-pages">${arr_1[i].pages} pages</p>
+          <h2 class="book-title">${book_library[i].title}</h2>
+          <p class="book-author">${book_library[i].author}</p>
+          <p class="book-pages">${book_library[i].pages} pages</p>
         </div>
         <div class="book-options-container">
           <!--  -->
@@ -449,7 +560,7 @@ document.addEventListener("DOMContentLoaded", function () {
               stroke-width="1.5"
               stroke="currentColor"
               class="read-svg option-svgs-size ${
-                arr_1[i].read === true ? "read-svg-clicked" : ""
+                book_library[i].read === true ? "read-svg-clicked" : ""
               }""
             >
               <path
@@ -500,19 +611,19 @@ document.addEventListener("DOMContentLoaded", function () {
             author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
           };
 
-          // This is for finding the index of the book that the user has clicked on, in the arr_1 array
-          index_tracker = arr_1.findIndex(
+          // This is for finding the index of the book that the user has clicked on, in the book_library array
+          index_tracker = book_library.findIndex(
             (book) =>
               book.title === book_to_find.title_find &&
               book.author === book_to_find.author_find
           );
 
           // This is for setting the book that the user has clicked on favorite property to false
-          arr_1[index_tracker].favorite = false;
+          book_library[index_tracker].favorite = false;
 
           // This is for updating the localStorage with the updated books properties
           for (let i = 0; i < localStorage.length; i++) {
-            localStorage.setItem(`book_${i}`, JSON.stringify(arr_1[i]));
+            localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
           }
 
           el.children[0].classList.remove("favo-svg-clicked");
@@ -523,55 +634,58 @@ document.addEventListener("DOMContentLoaded", function () {
             location.reload();
           }, 500);
         });
-
-        const delete_box = document.querySelectorAll(".delete-box");
-
-        // This is for looping through the all the books in the book_library array and
-        // and delete the clicked book and update the localStorage with the new book_library
-        // array
-        delete_box.forEach((el) => {
-          el.addEventListener("click", function () {
-            el.children[0].classList.toggle("deleted");
-
-            let index_tracker;
-            // This is for saving the books title and author that the user have clicked on
-            const book_to_find = {
-              title_find: `${el.parentNode.parentNode.children[0].firstChild.nextSibling.textContent}`,
-              author_find: `${el.parentNode.parentNode.children[0].firstElementChild.nextElementSibling.textContent}`,
-            };
-            // This is for finding the index of the book that the user has clicked on, in the book_library array
-            index_tracker = book_library.findIndex(
-              (book) =>
-                book.title === book_to_find.title_find &&
-                book.author === book_to_find.author_find
-            );
-
-            // This is for deleting the book that the user has clicked on
-            book_library.splice(index_tracker, 1);
-
-            // This is for clearing the localStorage every time the user deletes a book
-            localStorage.clear();
-
-            // This is for making sure that the user still have book/books object in the
-            // book_library array before storing the updated book_library array to the
-            // localStorage
-            if (book_library.length > 0) {
-              for (let i = 0; i < book_library.length; i++) {
-                localStorage.setItem(
-                  `book_${i}`,
-                  JSON.stringify(book_library[i])
-                );
-              }
-            }
-
-            // this is for reloading the current page so that the user
-            // gets the updated localStorage
-            setTimeout(function () {
-              location.reload();
-            }, 500);
-          });
-        });
         // ***
+      });
+
+      const delete_box = document.querySelectorAll(".delete-box");
+
+      // This is for looping through the all the books in the book_library array and
+      // and delete the clicked book and update the localStorage with the new book_library
+      // array
+      delete_box.forEach((el) => {
+        el.addEventListener("click", function () {
+          el.children[0].classList.toggle("deleted");
+
+          let index_tracker;
+          // This is for saving the books title and author that the user have clicked on
+          const book_to_find = {
+            title_find: `${el.parentElement.parentElement.children[0].children[0].innerHTML}`,
+            author_find: `${el.parentElement.parentElement.children[0].children[1].innerHTML}`,
+          };
+          // This is for finding the index of the book that the user has clicked on, in the book_library array
+          index_tracker = book_library.findIndex(
+            (book) =>
+              book.title === book_to_find.title_find &&
+              book.author === book_to_find.author_find
+          );
+
+          // This is for deleting the book that the user has clicked on
+          console.log(index_tracker, ":", book_library);
+
+          book_library.splice(index_tracker, 1);
+          const array_length = book_library.length;
+
+          // This is for clearing the localStorage every time the user deletes a book
+          localStorage.clear();
+
+          // This is for making sure that the user still have book/books object in the
+          // book_library array before storing the updated book_library array to the
+          // localStorage
+          if (book_library.length > 0) {
+            for (let i = 0; i < array_length; i++) {
+              localStorage.setItem(
+                `book_${i}`,
+                JSON.stringify(book_library[i])
+              );
+            }
+          }
+
+          // this is for reloading the current page so that the user
+          // gets the updated localStorage
+          setTimeout(function () {
+            location.reload();
+          }, 500);
+        });
       });
 
       // This is for selecting all the books read-svg
@@ -593,7 +707,7 @@ document.addEventListener("DOMContentLoaded", function () {
           };
 
           // This is for finding the index of the book that the user has clicked on, in the arr_1 array
-          index_tracker = arr_1.findIndex(
+          index_tracker = book_library.findIndex(
             (book) =>
               book.title === book_to_find.title_find &&
               book.author === book_to_find.author_find
@@ -601,15 +715,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // This is for toggling the book that the user has clicked on read property between false
           // and true
-          if (arr_1[index_tracker].read === true) {
-            arr_1[index_tracker].read = false;
-          } else if (arr_1[index_tracker].read === false) {
-            arr_1[index_tracker].read = true;
+          if (book_library[index_tracker].read === true) {
+            book_library[index_tracker].read = false;
+          } else if (book_library[index_tracker].read === false) {
+            book_library[index_tracker].read = true;
           }
 
           // This is for updating the localStorage with the updated books properties
           for (let i = 0; i < localStorage.length; i++) {
-            localStorage.setItem(`book_${i}`, JSON.stringify(arr_1[i]));
+            localStorage.setItem(`book_${i}`, JSON.stringify(book_library[i]));
           }
 
           // this is for reloading the current page so that the user
