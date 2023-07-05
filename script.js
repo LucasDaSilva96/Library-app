@@ -9,6 +9,8 @@ const book_available_container = document.querySelector(
 const search_bar = document.getElementById("search-bar");
 const search_svg = document.querySelector(".search-svg-container");
 const add_book_btn = document.querySelector(".add-book-svg-box");
+const search_svg_icon = document.querySelector(".search-svg");
+
 // ***********
 let search_typed;
 
@@ -144,6 +146,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // ******************************************
 
     search_svg.addEventListener("click", function () {
+      search_svg_icon.classList.add("rotate-scale-up");
+      setTimeout(function () {
+        search_svg_icon.classList.remove("rotate-scale-up");
+      }, 900);
       if (search_typed === undefined || search_typed === null) {
         alert("Please enter a valid input");
       } else {
@@ -180,6 +186,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // ******************************************
 
     search_svg.addEventListener("click", function () {
+      search_svg_icon.classList.add("rotate-scale-up");
+      setTimeout(function () {
+        search_svg_icon.classList.remove("rotate-scale-up");
+      }, 900);
       if (search_typed === undefined || search_typed === null) {
         alert("Please enter a valid input");
       } else {
@@ -403,6 +413,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // ******************************************
 
     search_svg.addEventListener("click", function () {
+      search_svg_icon.classList.add("rotate-scale-up");
+      setTimeout(function () {
+        search_svg_icon.classList.remove("rotate-scale-up");
+      }, 900);
       if (search_typed === undefined || search_typed === null) {
         alert("Please enter a valid input");
       } else {
@@ -411,28 +425,6 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
           window.location.href = "./search.html";
         }, 200);
-      }
-    });
-
-    // *******************************************
-
-    // ******************************************
-
-    search_svg.addEventListener("click", function () {
-      if (search_typed === undefined || search_typed === null) {
-        alert("Please enter a valid input");
-      } else {
-        search_svg.addEventListener("click", function () {
-          if (search_typed === undefined || search_typed === null) {
-            alert("Please enter a valid input");
-          } else {
-            sessionStorage.setItem("search", search_typed);
-
-            setTimeout(function () {
-              window.location.href = "./search.html";
-            }, 200);
-          }
-        });
       }
     });
 
@@ -469,6 +461,10 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
+    if (nr_of_books <= 0) {
+      nr_of_books_read.style.backgroundColor = "#7a8b99";
+    }
+
     nr_of_books_read.textContent = `${nr_of_books}`;
     nr_of_pages_read.textContent = `${nr_of_pages}`;
   }
@@ -484,6 +480,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // ******************************************
 
     search_svg.addEventListener("click", function () {
+      search_svg_icon.classList.add("rotate-scale-up");
+      setTimeout(function () {
+        search_svg_icon.classList.remove("rotate-scale-up");
+      }, 900);
       if (search_typed === undefined || search_typed === null) {
         alert("Please enter a valid input");
       } else {

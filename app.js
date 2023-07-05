@@ -2,6 +2,7 @@
 const search_bar = document.getElementById("search-bar");
 const search_svg = document.querySelector(".search-svg-container");
 const book_search_list = document.querySelector(".book-list");
+const search_svg_icon = document.querySelector(".search-svg");
 
 import { Book } from "./script.js";
 import { book_library } from "./script.js";
@@ -141,6 +142,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
   // *************************************
   search_svg.addEventListener("click", function () {
+    search_svg_icon.classList.add("rotate-scale-up");
+    setTimeout(function () {
+      search_svg_icon.classList.remove("rotate-scale-up");
+    }, 900);
     book_search_list.innerHTML = "";
     // **************
     if (search_typed === undefined || search_typed === null) {
