@@ -319,6 +319,10 @@ a {
   font-weight: 600;
 }
 
+.number-of-books-read-box {
+  background-color: var(--green-color);
+}
+
 .log-heading {
   border-bottom: 1.5px solid #000;
 }
