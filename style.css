@@ -333,6 +333,11 @@ a {
 
 /* ********************************* */
 
+/* ****** search.html ***** */
+.search-list {
+  background-color: #6d4c3d;
+}
+
 /* Reusable classes */
 
 .current-page {
@@ -394,4 +399,8 @@ a {
   background-color: var(--green-color);
 }
 
+.added {
+  fill: var(--green-color);
+  transform: scale(1.4);
+}
 /* ************ */
