@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setTimeout(function () {
           window.location.href = "./search.html";
-        }, 200);
+        }, 750);
       }
     });
 
@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setTimeout(function () {
           window.location.href = "./search.html";
-        }, 200);
+        }, 750);
       }
     });
 
@@ -427,7 +427,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setTimeout(function () {
           window.location.href = "./search.html";
-        }, 200);
+        }, 750);
       }
     });
 
@@ -499,7 +499,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setTimeout(function () {
           window.location.href = "./search.html";
-        }, 200);
+        }, 750);
       }
     });
 
