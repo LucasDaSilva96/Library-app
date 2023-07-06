@@ -22,11 +22,14 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 
   // *************************************
+  // This is the search function. The function takes the input from the user and
+  // perform the search with the google book API
   if (session_data === undefined || session_data === null) {
     alert("Please enter a valid input");
   } else {
     const searchBooks = async (query) => {
       try {
+        // This is the google API
         const response = await fetch(
           `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
             query
@@ -39,9 +42,11 @@ window.addEventListener("DOMContentLoaded", function () {
       }
     };
 
+    // This is the function in charge of making the search
     searchBooks(`${session_data}`).then((result) => {
       let size = result.items.length;
 
+      // This is for rendering the result so that the user can see the result
       if (size > 0) {
         for (let i = 0; i < size; i++) {
           book_search_list.innerHTML += `
@@ -77,6 +82,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
         const add_book_svg = document.querySelectorAll(".add");
 
+        // This function is for letting the user add a book from the result to his/hers book-list
         add_book_svg.forEach((el) => {
           el.addEventListener("click", function () {
             el.children[0].classList.toggle("added");
@@ -141,6 +147,8 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   // *************************************
+  // If the user wants to perform a new search on the search.html then this search function
+  // will be invoked
   search_svg.addEventListener("click", function () {
     search_svg_icon.classList.add("rotate-scale-up");
     setTimeout(function () {

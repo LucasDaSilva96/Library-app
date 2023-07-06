@@ -144,7 +144,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // **********************************
 
     // ******************************************
-
+    // This is the search function. The function takes the input from the user and stored it on the
+    // sessionStorage, then redirect the user to the search.html file, which then retrieves the
+    // data saved in the sessionStorage to perform the search with the google book API
     search_svg.addEventListener("click", function () {
       search_svg_icon.classList.add("rotate-scale-up");
       setTimeout(function () {
@@ -184,7 +186,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // **********************************
 
     // ******************************************
-
+    // This is the search function. The function takes the input from the user and stored it on the
+    // sessionStorage, then redirect the user to the search.html file, which then retrieves the
+    // data saved in the sessionStorage to perform the search with the google book API
     search_svg.addEventListener("click", function () {
       search_svg_icon.classList.add("rotate-scale-up");
       setTimeout(function () {
@@ -414,7 +418,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // **********************************
     // ******************************************
-
+    // This is the search function. The function takes the input from the user and stored it on the
+    // sessionStorage, then redirect the user to the search.html file, which then retrieves the
+    // data saved in the sessionStorage to perform the search with the google book API
     search_svg.addEventListener("click", function () {
       search_svg_icon.classList.add("rotate-scale-up");
       setTimeout(function () {
@@ -486,7 +492,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // **********************************
     // ******************************************
-
+    // This is the search function. The function takes the input from the user and stored it on the
+    // sessionStorage, then redirect the user to the search.html file, which then retrieves the
+    // data saved in the sessionStorage to perform the search with the google book API
     search_svg.addEventListener("click", function () {
       search_svg_icon.classList.add("rotate-scale-up");
       setTimeout(function () {
