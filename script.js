@@ -1,3 +1,4 @@
+window.location.href = "/Library-app/index.html";
 // DOM - selections
 const book_unavailable_container = document.querySelector(
   ".book-container-books-unavailable"
@@ -133,7 +134,6 @@ const add_new_book_form_function = function () {
 
 // This is for checking if the DOM has loaded, and if so invoke everything inside
 document.addEventListener("DOMContentLoaded", function () {
-  window.location.href = "/Library-app/index.html";
   // This checks if the localStorage has any books stored and if the user is on the
   // index.html file. If the localStorage is empty do the following....
   if (localStorage.length <= 0 && window.location.href.includes("index.html")) {
