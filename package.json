@@ -1,6 +1,7 @@
 {
   "name": "app",
   "version": "1.0.0",
+  "type": "module",
   "description": "Book app",
   "main": "script.js",
   "scripts": {
