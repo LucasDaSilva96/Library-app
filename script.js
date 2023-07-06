@@ -125,7 +125,7 @@ const add_new_book_form_function = function () {
 
       // This is for redirect the user back to the index.html
       setTimeout(function () {
-        window.location.href = "index.html";
+        window.location.href = "./index.html";
       }, 300);
     }
   });
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
     book_unavailable_container.classList.remove("display-none");
     // This is for redirect the user to the add add-book.html
     add_book_btn.addEventListener("click", function () {
-      window.location.href = "add-book.html";
+      window.location.href = "./add-book.html";
       add_new_book_form_function();
     });
 
@@ -346,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // the user can add a new book to the localStorage
     const add_book = document.querySelector(".add-new-book-btn");
     add_book.addEventListener("click", function () {
-      window.location.href = "add-book.html";
+      window.location.href = "./add-book.html";
       add_new_book_form_function();
     });
 
