@@ -1,4 +1,3 @@
-window.location.href = "/Library-app/index.html";
 // DOM - selections
 const book_unavailable_container = document.querySelector(
   ".book-container-books-unavailable"
