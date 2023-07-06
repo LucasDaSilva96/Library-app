@@ -133,6 +133,7 @@ const add_new_book_form_function = function () {
 
 // This is for checking if the DOM has loaded, and if so invoke everything inside
 document.addEventListener("DOMContentLoaded", function () {
+  window.location.href = "/Library-app/index.html";
   // This checks if the localStorage has any books stored and if the user is on the
   // index.html file. If the localStorage is empty do the following....
   if (localStorage.length <= 0 && window.location.href.includes("index.html")) {
@@ -158,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.setItem("search", search_typed);
 
         setTimeout(function () {
-          window.location.href = "./search.html";
+          window.location.href = "/Library-app/search.html";
         }, 750);
       }
     });
@@ -168,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
     book_unavailable_container.classList.remove("display-none");
     // This is for redirect the user to the add add-book.html
     add_book_btn.addEventListener("click", function () {
-      window.location.href = "./add-book.html";
+      window.location.href = "/Library-app/add-book.html";
       add_new_book_form_function();
     });
 
@@ -200,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.setItem("search", search_typed);
 
         setTimeout(function () {
-          window.location.href = "./search.html";
+          window.location.href = "/Library-app/search.html";
         }, 750);
       }
     });
@@ -346,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // the user can add a new book to the localStorage
     const add_book = document.querySelector(".add-new-book-btn");
     add_book.addEventListener("click", function () {
-      window.location.href = "./add-book.html";
+      window.location.href = "/Library-app/add-book.html";
       add_new_book_form_function();
     });
 
@@ -432,7 +433,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.setItem("search", search_typed);
 
         setTimeout(function () {
-          window.location.href = "./search.html";
+          window.location.href = "/Library-app/search.html";
         }, 750);
       }
     });
@@ -506,7 +507,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.setItem("search", search_typed);
 
         setTimeout(function () {
-          window.location.href = "./search.html";
+          window.location.href = "/Library-app/search.html";
         }, 750);
       }
     });
