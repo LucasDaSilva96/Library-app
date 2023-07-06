@@ -404,6 +404,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // ****************************************************
 
   if (window.location.href.includes("library-log.html")) {
+    const motivation_box = document.querySelector(".motivation-box");
+    const nr_of_books_read_box = document.querySelector(".number-of-pages");
+
     // **********************************
     search_bar.addEventListener("input", function () {
       search_typed = search_bar.value;
@@ -462,7 +465,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (nr_of_books <= 0) {
-      nr_of_books_read.style.backgroundColor = "#7a8b99";
+      nr_of_books_read.style.backgroundColor = "#6d4c3d";
+      motivation_box.style.backgroundColor = "#6d4c3d";
+      nr_of_books_read_box.style.backgroundColor = "#6d4c3d";
+      motivation_box.children[0].textContent = "Start reading today!";
+    } else {
+      nr_of_books_read_box.style.backgroundColor = "#8cc084";
     }
 
     nr_of_books_read.textContent = `${nr_of_books}`;
